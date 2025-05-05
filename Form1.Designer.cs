@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp8
 {
@@ -114,7 +114,7 @@ namespace WindowsFormsApp8
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 25);
             this.button1.TabIndex = 6;
-            this.button1.Text = "Add City";
+            this.button1.Text = "Thêm thành phố";
             this.button1.Click += new System.EventHandler(this.btnAddCity_Click);
             // 
             // button2
@@ -123,7 +123,7 @@ namespace WindowsFormsApp8
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 25);
             this.button2.TabIndex = 5;
-            this.button2.Text = "Add Edge";
+            this.button2.Text = "Thêm cạnh";
             this.button2.Click += new System.EventHandler(this.btnAddEdge_Click);
             // 
             // button3
@@ -132,7 +132,7 @@ namespace WindowsFormsApp8
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 25);
             this.button3.TabIndex = 4;
-            this.button3.Text = "Remove Edge";
+            this.button3.Text = "Xóa cạnh";
             this.button3.Click += new System.EventHandler(this.btnRemoveEdge_Click);
             // 
             // button4
@@ -141,7 +141,7 @@ namespace WindowsFormsApp8
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 25);
             this.button4.TabIndex = 3;
-            this.button4.Text = "Remove City";
+            this.button4.Text = "Xóa thành phố";
             this.button4.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // button5
@@ -150,7 +150,7 @@ namespace WindowsFormsApp8
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 25);
             this.button5.TabIndex = 2;
-            this.button5.Text = "Find Path";
+            this.button5.Text = "Tìm đường đi";
             this.button5.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // button6
@@ -159,7 +159,7 @@ namespace WindowsFormsApp8
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 25);
             this.button6.TabIndex = 1;
-            this.button6.Text = "Reset";
+            this.button6.Text = "Làm mới";
             this.button6.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // button7
@@ -168,7 +168,7 @@ namespace WindowsFormsApp8
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 25);
             this.button7.TabIndex = 0;
-            this.button7.Text = "Exit";
+            this.button7.Text = "Thoát";
             this.button7.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // Form1
