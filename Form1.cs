@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace WindowsFormsApp8
@@ -22,23 +23,40 @@ namespace WindowsFormsApp8
         private void btnAddCity_Click(object sender, EventArgs e)
         {
             string name = textBox1.Text.Trim();
-            if (!int.TryParse(textBox2.Text, out int x) || !int.TryParse(textBox3.Text, out int y) || string.IsNullOrEmpty(name))
+
+            if (string.IsNullOrEmpty(name))
             {
-                MessageBox.Show("Please enter valid city name and coordinates.");
+                MessageBox.Show("Vui lòng nhập tên thành phố.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (x < 0 || x >= panel1.Width || y < 0 || y >= panel1.Height)
+            if (string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
             {
-                MessageBox.Show($"Coordinates must be inside the panel (0–{panel1.Width - 1}, 0–{panel1.Height - 1})");
+                MessageBox.Show("Vui lòng nhập đầy đủ tọa độ X và Y.", "Thiếu tọa độ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            graph.AddVertex(name, x, y);
-            UpdateComboBoxes();
-            textBox1.Clear(); textBox2.Clear(); textBox3.Clear();
-            panel1.Invalidate();
+            if (!int.TryParse(textBox2.Text.Trim(), out int x) || !int.TryParse(textBox3.Text.Trim(), out int y))
+            {
+                MessageBox.Show("Tọa độ phải là số nguyên!", "Lỗi Định Dạng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (x < 0 || x > 600 || y < 0 || y > 400)
+            {
+                MessageBox.Show("Tọa độ vượt quá giới hạn cho phép (x: 0–600, y: 0–400).", "Lỗi Tọa Độ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!graph.AddVertex(name, x, y))
+            {
+                MessageBox.Show("Tọa độ đã tồn tại! Vui lòng nhập tọa độ khác.", "Trùng Tọa Độ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            panel1.Invalidate();  // Cập nhật lại panel để vẽ thành phố mới
         }
+
         private void UpdateComboBoxes()
         {
             comboBox1.Items.Clear();
@@ -90,9 +108,9 @@ namespace WindowsFormsApp8
             graph.Dijkstra(from);
 
             if (graph.Distance[to] == double.MaxValue)
-                textBox5.Text = "No path found.\r\nDistance: Error";
+                textBox5.Text = "Không tìm thấy đường đi.\r\nKhoảng cách: Lỗi";
             else
-                textBox5.Text = $"Path: {graph.GetPath(to)}\r\nDistance: {graph.Distance[to]:0.00}";
+                textBox5.Text = $"Đường đi ngắn nhất: {graph.GetPath(to)}\r\n: {graph.Distance[to]:0.00}";
 
             panel1.Invalidate();
         }
