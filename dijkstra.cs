@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 public class Graph
 {
@@ -10,11 +10,22 @@ public class Graph
     public int[] Previous = new int[Max];
     public bool[] Visited = new bool[Max];
 
-    public void AddVertex(string name, int x, int y)
+    public bool AddVertex(string name, int x, int y)
     {
-        if (VertexCount >= Max) return;
+        for (int i = 0; i < VertexCount; i++)
+        {
+            if (Vertices[i] != null && Vertices[i].X == x && Vertices[i].Y == y)
+            {
+                // Tọa độ đã tồn tại, trả về false để báo hiệu lỗi
+                return false;
+            }
+        }
+
+        if (VertexCount >= Max) return false;
+
         Vertices[VertexCount] = new Vertex(VertexCount, name, x, y);
         VertexCount++;
+        return true;
     }
 
     public void AddEdge(int from, int to)
@@ -99,7 +110,7 @@ public class Graph
     public string GetPath(int target)
     {
         if (Distance[target] == double.MaxValue)
-            return "No path";
+            return "Không có đường đi";
 
         string path = "";
         int current = target;
